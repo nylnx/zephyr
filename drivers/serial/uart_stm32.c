@@ -367,14 +367,13 @@ static inline uint32_t uart_stm32_cfg2ll_databits(enum uart_config_data_bits db,
 {
 	switch (db) {
 /* Some MCU's don't support 7B or 9B datawidth */
-#ifdef LL_USART_DATAWIDTH_7B
 	case UART_CFG_DATA_BITS_7:
+#ifdef LL_USART_DATAWIDTH_7B
 		if (p == UART_CFG_PARITY_NONE) {
 			return LL_USART_DATAWIDTH_7B;
-		} else {
-			return LL_USART_DATAWIDTH_8B;
 		}
-#endif	/* LL_USART_DATAWIDTH_7B */
+#endif /* LL_USART_DATAWIDTH_7B */
+		return LL_USART_DATAWIDTH_8B;
 #ifdef LL_USART_DATAWIDTH_9B
 	case UART_CFG_DATA_BITS_9:
 		return LL_USART_DATAWIDTH_9B;
